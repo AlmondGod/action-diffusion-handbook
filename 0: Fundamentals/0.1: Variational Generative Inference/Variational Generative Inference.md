@@ -111,3 +111,6 @@ Also, the difference between them is exactly the KL divergence between the appro
 so the lower bound $L$ is exactly the log probability of the data if and only if the approximate posterior distribution is exactly the true posterior distribution
 
 So, maximizing our ELBO is the same as minimizing the KL-divergence between $q(Z)$ and $q(x,z)!$
+
+
+[[Next]](../0.2:%20Denoising%20Diffusion%20Probabilistic%20Models/DDPMs.md)
