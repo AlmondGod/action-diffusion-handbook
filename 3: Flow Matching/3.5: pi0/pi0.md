@@ -4,7 +4,7 @@
 
 From [$\pi_0$: A Vision-Language-Action Flow Model for General Robot Control](https://www.physicalintelligence.company/download/pi0.pdf)
 
-“action expert” uses conditional flow matching to augment a pretrained Vision-language model (VLM).
+A generalist robot foundation model consisting of an “action expert” which uses conditional flow matching to augment a pretrained Vision-Language Model (VLM).
 
 “high precision and multimodal modeling” so ideal for “high-frequency dexterous tasks” up to 50Hz.
 

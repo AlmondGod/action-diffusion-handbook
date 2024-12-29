@@ -2,8 +2,7 @@
 
 # Variational Generative Inference 
 
-Heavily inspired by https://xyang35.github.io/2017/04/14/variational-lower-bound/ by Xitong Yang
-and https://blog.evjang.com/2016/08/variational-bayes.html by Eric Jang
+*Heavily inspired by [Variational Lower Bound](https://xyang35.github.io/2017/04/14/variational-lower-bound/) by Xitong Yang and [Variational Bayes](https://blog.evjang.com/2016/08/variational-bayes.html) by Eric Jang*
 
 Diffusion operates under the assumption that the data is generated from a prior distribution, and we want to sample from this distribution.
 
@@ -19,7 +18,7 @@ $p(x|z)$ is likelihood, for example how probable a certain image is given we kno
 
 So our goal is to have an accurate generative model $p(x|z)$ that we can sample from.
 
-We can do so by trying to maximize the likelihood that our model will produce the data we can access.
+We can do so by trying to maximize the likelihood that our model will produce the data we can access, since the true distribution would also have high likelihood of producing our data.
 
 ## Deriving the Variational Lower Bound
 
@@ -91,7 +90,7 @@ So, maximizing our ELBO is the same as minimizing the KL-divergence between $q(Z
 
 $p(x|z)$ is too hard to compute, so we start with a parametric distribution (for example, Gaussian) $Q_\phi(z|x)$ and adjust $\phi$ to make $Q$ close to $p$ by minimizing the KL-Divergence between the two (see Deriving KL-Divergence)
 
-# Why do we need this in diffusion?
+### Why do we need this in diffusion?
 
 This is, at its core, what Diffusion is trying to do: maximize the likelihood of the data by minimziing the KL-Divergence between the true posterior distribution and our approximation. See exactly how:
 
