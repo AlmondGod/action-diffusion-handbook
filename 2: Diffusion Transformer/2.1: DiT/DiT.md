@@ -46,4 +46,9 @@ Use standard VAE model from stable diffusion as encoder/decoder and train DiT in
 1. larger DiT models ar more compute efficient
 2. Scaling up Diffusion sampling compute generally cannot compensate for lack of model compute
 
+
+For a real-time visualization of DiT-Policy denoising actions to generate trajectories in genesis simulator, check out this Colab Notebook: 
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YHs_KuSM5f3AuykjkCBfaHNYTZKg08-a)
+
 [[Prev]](../../1:%20Diffusion%20Policy/1.2:%20Components%20of%20Diffusion%20Policy/DP%20Components.md) [[Next]](../2.2:%20Components%20of%20Diffusion%20Transformers/DiT%20Components.md)

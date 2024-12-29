@@ -86,10 +86,11 @@ Common choices are CNNs and Transformers (both use the same visual encoders)
 2. condition on obs $O$ with Feature-wise Linear Modulations(FiLM) and iter $k$
     1. **Feature-wise Linear Modulation:** NN layer that does feature-wise affine transformation conditioned on arbitrary input
         
-        ![Screenshot 2024-12-20 at 2.03.02 AM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/760b4b9b-d37f-4002-adac-6023331e2433/1d3399d1-f80b-4bc2-849e-55df6c640e6b/Screenshot_2024-12-20_at_2.03.02_AM.png)
-        
+$$
+\text{FiLM}(F_{i,c}|\gamma_{i,c}, \beta_{i,c}) = \gamma_{i,c}F_{i,c} + \beta_{i,c}
+$$
     
-    , or output $= γ(c) * h + β(c)$ where $\gamma$ (scaling) and $\Beta$ (shifting) are functions of the conditioning, usually neural nets, and $h$ is the feature to modify (each has its own gamma and beta)
+or output $= γ(c) * h + β(c)$ where $\gamma$ (scaling) and $\Beta$ (shifting) are functions of the conditioning, usually neural nets, and $h$ is the feature to modify (each has its own gamma and beta)
     
 3. Don’t condition on goal due to receding horizon, still possible to add back in though
 
@@ -133,7 +134,7 @@ Experimentally, DDIm with 100 training iters and 10 inference iters leads to 0.1
     1. **action basins:** valleys in diffusion gradient map which are groups of similar actions
     2. Due to stochastic initialization and noise added in the navigation (denoising) stage, we can end off in different action basins which achieve the same goal, for example:
     
-    ![Screenshot 2024-12-20 at 4.12.20 PM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/760b4b9b-d37f-4002-adac-6023331e2433/050995a4-bc22-434e-a03a-595dd077b841/Screenshot_2024-12-20_at_4.12.20_PM.png)
+    ![Diffusion Trajectories](./Diffusion%20Trajectories.webp)
     
 
 ### Synergy with Position Control
@@ -175,14 +176,9 @@ but $z$ is necessary in those methods to normalize and prevent exploding energy 
 5. low latency 
 6. stable training
 
-# Sidenote from RDT-1B
 
-Technically we actually want:
+For a more hands-on look at Action Diffusion, check out this Colab Notebook by the original authors of Diffusion Policy: 
 
-$$
-a_t^{k-1} = \frac{\sqrt{\bar{\alpha}^{k-1}}\beta^k}{1-\bar{\alpha}^k}a_t^0 + \frac{\sqrt{\alpha^k(1-\bar{\alpha}^{k-1})}}{1-\bar{\alpha}^k}a_t^k + \sigma^kz, \quad k=K,\ldots,1
-$$
-
-but a_0 is intractable so we estimate the noise with an NN
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1gxdkgRVfM55zihY9TFLja97cSVZOZq2B?usp=sharing#scrollTo=OknH8Qfqrtc9)
 
 [[Prev]](../../0:%20Fundamentals/0.2:%20Denoising%20Diffusion%20Probabilistic%20Models/DDPMs.md) [[Next]](../1.2:%20Components%20of%20Diffusion%20Policy/DP%20Components.md)

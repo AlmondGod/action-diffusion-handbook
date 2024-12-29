@@ -1,3 +1,9 @@
+# Denoising Diffusion Probabilistic Models
+
+From [Denoising Diffusion Probabilistic Models](https://arxiv.org/pdf/2006.11239)
+
+DDPMs are an implementation of the idea of variational inference. We sample from $p(x | z)$ by starting from noise and denoising until we have a sample from the model distribution.
+
 # Inference
 
 1. start from $x^K$ sampled from Gaussian noise, perform $K$ iterations of denoising to produce increasingly less noisy intermediate actions $x^k…x^0$, where $x^0$ is the desired noise-free output
@@ -13,7 +19,7 @@ essentially the next diffusion timstep is the scaled(previous - weighted network
 
 we scale by $\alpha$ (usually < 1) in denoising (and in noising) so our values don't grow without bound as we progress in timesteps
 
-same as noisy gradient descent step (noise pred network is predicting gradient field, gamma is learning rate) (CRAZY/COOL!)
+> This is the same as noisy gradient descent step, where the noise prediction network is predicting the gradient field, and $\gamma$ is the learning rate!
 
 $$
 \mathbf{x}' = \mathbf{x} - \gamma\nabla E(\mathbf{x})
@@ -40,5 +46,11 @@ Same as minimizing KL-divergence between data dist $p(x^0)$ and DDPM sample dist
     - true log likelihood is what we want to optimize, but too hard so VLB gives us easier lb to optimize (and if lower bound improves we know log likelihood is improving)
     - ensures denoising matches noising
 - **KL-divergence**: how different two data distributions are
+
+Here's an accompanyng Colab Notebook to familiarize oneself with DDPMs on a simple 2D example: 
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1DC9PVdfgKzvGv73yoAOw4RRFgf35Qr1-#scrollTo=3Ncc92M6W3Aa&uniqifier=1)
+
+With this base of DDPMs, we can see how Action Diffusion works next.
 
 [[Prev]](../0.1:%20Variational%20Generative%20Inference/Variational%20Generative%20Inference.md) [[Next]](../../1:%20Diffusion%20Policy/1.1:%20Action%20Diffusion/Action%20Diffusion.md)

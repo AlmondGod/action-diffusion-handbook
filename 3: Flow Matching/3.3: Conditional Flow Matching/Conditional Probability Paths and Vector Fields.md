@@ -71,5 +71,8 @@ $$
 u_t(x|x_1) = \frac{\sigma_t'(x_1)}{\sigma_t(x_1)}(x - \mu_t(x_1)) + \mu_t'(x_1)
 $$
 
+For a code example, here's a simple 2D Flow Matching colab notebook: 
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1DPXh1Qw1GXGGpgBLy7qjGvkH1MgB9lxz#scrollTo=SRoDWaO7mEW9)
 
 [[Prev]](./Conditional%20Flow%20Matching.md) [[Next]](../3.4:%20Diffusion%20and%20Optimal%20Transport%20as%20Flows/Diffusion%20Flow.md)
