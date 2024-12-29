@@ -3,41 +3,25 @@
 Heavily inspired by https://xyang35.github.io/2017/04/14/variational-lower-bound/ by Xitong Yang
 and https://blog.evjang.com/2016/08/variational-bayes.html by Eric Jang
 
-In machine learning, we are often presented with **statistical inference** problems, where we want to infer the value of a random variable given the value of another random variable.
+Motivation: priors for Diffusion
 
-How do we do this?
+Diffusion operates under the assumption that the data is generated from a prior distribution, and we want to sample from this distribution.
 
-In **optimization problem**, we find parameters that minimize an objective function.
+How do we create a simple generative model under this assumption, with no access to the distribution,using only data sampled from that distribution?
 
-The **inference-optimization duality** tells us that we can in fact view statistical inference problems as optimization problems. 
+More concretely, we have $X$ observations/data and $Z$ hidden/latent variables (such as the parameters of such a model).
 
-**Variational Bayesian (VB) Methods:** have the inference-optimization duality feature
-
-**variational/evidence-based lower bound:** 
-
-- plays essential role in Variationa Bayesian Method derivations
-
-## Setup
-
-$X$ observations/data and $Z$ hidden/latent variables (such as params)
-
-$P(X)$: prob dist over $X$ 
+$P(X)$: prob dist over $X$
 
 $p(x)$: density function dist of $X$
 
-Posterior distribution of hidden variables ($z$ given a particular $x$): 
-
-$$
-p(z|x) = \frac{p(x | z)p(z)}{p(x)} = \frac{p(x|z)p(z)}{\int_z p(x,z)}
-$$
-
-Sampling from $p(z|x)$ can, for example, give us a classifier where $z$ is “is a cat” and $x$ is “raw pixel observations”
-
 $P(z)$ is prior probability, for example, 1/3 of all existent images are cats
 
-$p(x|z)$ is likelihood, for example how probable a certain image is given we know it is a cat. Sampling $x$ from this distribution will give us a generative model!
+$p(x|z)$ is likelihood, for example how probable a certain image is given we know it is a cat. Sampling $x$ from this distribution will give us a generative model! If we wanted to generate cats, we could set z to be "cat" and sample from this distribution.
 
-$p(x|z)$ is too hard to compute, so we start with a parametric dist (ex Gaussian) $Q_\phi(z|x)$ and adjust $\phi$ to make $Q$ close to $p$  by minimizing the KL-Divergence between the two(see Deriving KL-Divergence)
+So our goal is to have an accurate generative model $p(x|z)$ that we can sample from.
+
+We can do so by trying to maximize the likelihood that our model will produce the data we can access.
 
 ## Deriving the Variational Lower Bound
 
@@ -73,14 +57,11 @@ $$
 L = \mathbb{E}_q[\log p(X,Z)] + H[Z], \text{where } H[Z] = -\mathbb{E}_q[\log q(Z)]
 $$
 
+This is the quantity we want to maximize to get the best generative model! However, we don't have access to the true posterior distribution $p(Z|X)$, so we need to approximate it.
 
 ## Deriving KL-Divergence
 
-$p(Z)$ doesn’t even show up in the above equation
-
-computation of $p(Z|X)$ is often intractable/difficult to derive (ex: integrating all configurations of $z$ to compute the denominator). But we need it because (WHY?)
-
-Variational Methods: approximate $q(Z)$ as close as possible to true posterior distribution $p(Z|X)$
+In variational methods (like Diffusion!), we approximate $q(Z)$ as close as possible to true posterior distribution $p(Z|X)$
 
 parametrized as $q(Z|\theta)$, and find parameters to make $q$ close to posterior of interest $p(Z|X)$
 
@@ -112,5 +93,12 @@ so the lower bound $L$ is exactly the log probability of the data if and only if
 
 So, maximizing our ELBO is the same as minimizing the KL-divergence between $q(Z)$ and $q(x,z)!$
 
+
+
+$p(x|z)$ is too hard to compute, so we start with a parametric dist (ex Gaussian) $Q_\phi(z|x)$ and adjust $\phi$ to make $Q$ close to $p$ by minimizing the KL-Divergence between the two(see Deriving KL-Divergence)
+
+# Why do we need this in diffusion?
+
+This is, at its core, what Diffusion is trying to do: maximize the likelihood of the data by minimziing the KL-Divergence between the true posterior distribution and our approximation. See exactly how:
 
 [[Next]](../0.2:%20Denoising%20Diffusion%20Probabilistic%20Models/DDPMs.md)
