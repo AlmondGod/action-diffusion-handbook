@@ -13,8 +13,6 @@ From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
 
 Regular Diffusion has confined space of sampling probability paths so long training times and inefficient sampling
 
-# Continuous Normalizing Flows
-
 **Time-Dependent Vector-Field**: a field of [(0 or 1) by d] vectors at each point
 
 $$
@@ -76,15 +74,9 @@ vector field generates a prob density path if flow satisfies the push-forward eq
 
 Essentially, we just need to learn the vector field! if we learn this, then we can sample any arbitrary point and follow the flow defined by the vector field to some desired probability distribution we want.
 
-# Sidenotes
-
-Originally, Continuous Normalizing Flows were trained with Maximum-Likelihood objectives (maximize likelihood of each datapoint being generated from path) 
-
-<aside>
-
+> Originally, Continuous Normalizing Flows were trained with Maximum-Likelihood objectives (maximize likelihood of each datapoint being generated from path) 
 > This Involved expensive Ordinary Differential Equation simulations so high time complexity and infeasible for high-dimensional state spaces (images/actions)
-> 
-</aside>
+
 
 
 [[Prev]](../../2:%20Diffusion%20Transformer/2.3:%20RDT-1B/RDT-1B.md) [[Next]](../3.2:%20Flow%20Matching/Flow%20Matching.md)

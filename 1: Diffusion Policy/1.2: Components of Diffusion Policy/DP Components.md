@@ -4,6 +4,8 @@
 
 From [Unpacking the Individual Components of Diffusion Policy](https://arxiv.org/pdf/2412.00084)
 
+A more streamlined summary of Diffusion Policy's unique properties is below:
+
 1. **Observation Sequence as Input:** critical for tasks requiring Absolute Control but  irrelevant for Delta Control Mode
     1. Absolute Control: policy outputs absolute position/velocity
     2. Delta Control Mode: policy outputs delta change in position/velocity

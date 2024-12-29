@@ -24,7 +24,7 @@ $$
 - first learn autoencoder encoding of x into latent space of zs, then learn Diffusion Model in space zs, then generate with diffusion model and learned decoder
 - Theory is better Diffusion Model since vastly lower latent dim than data dim
 
-# Architecture
+## Architecture
 
 Like Vision Transfomrer (ViT), operates on sequence of patches
 
@@ -42,10 +42,14 @@ Like Vision Transfomrer (ViT), operates on sequence of patches
 
 Use standard VAE model from stable diffusion as encoder/decoder and train DiT in latent space
 
-# Observations
+## Observations
 
 1. larger DiT models ar more compute efficient
 2. Scaling up Diffusion sampling compute generally cannot compensate for lack of model compute
+
+2. actions with noise $A_t^k$ passed in as input tokens for transformer decoder, with sinusoidal embeddings for diffusion iteration $k$ prepended as first token
+3. observation transformed into obs embedding sequence by shared mLP, then passed to transformer decoder as input features
+4. gradient predicted noise $\epsilon_\theta$ predicted by each output token of decoder stack
 
 
 For a real-time visualization of DiT-Policy denoising actions to generate trajectories in genesis simulator, check out this Colab Notebook: 

@@ -21,7 +21,7 @@ u_t(x|x_1) = \frac{\sigma_t'(x_1)}{\sigma_t(x_1)}(x - \mu_t(x_1)) + \mu_t'(x_1)
 $$
     
 
-### Derivation if Interested:
+### Derivation (Skip if Uninterested)
 
 For a given prob path, there are infinite number of vector fields to generate it, but many have components which don't effect underlying dist
 

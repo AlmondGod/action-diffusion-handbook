@@ -6,15 +6,15 @@ From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
 
 Diffusion is a subset of flow matching. How do we get the Denoising Diffusion process from flow matching?
 
-Diffusion Variants;
+### Diffusion Variants:
 
-1. Variance Exploding: noise added by scaling up variance (we don’t use this anymore), but for this we would have 
+1. **Variance Exploding:** noise added by scaling up variance (we don’t use this anymore), but for this we would have 
     
 $$
 \mu_t(x_1) = x_1 \text{ and } \sigma_t(x_1) = \sigma_{1-t}
 $$
     
-2. Variance Preserving: noise added and preserving total variance (modern diffusion with alpha scaling)
+2. **Variance Preserving:** noise added and preserving total variance (modern diffusion with alpha scaling)
 
 For Variance Preserving Diffusion, we choose 
 

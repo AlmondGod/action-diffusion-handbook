@@ -22,7 +22,7 @@ or the expected difference between our neural network predicting the vector fiel
 
 At zero loss the learned CNF model generates $p_t(x)$ (our desired final data dist)
 
-But of course, **we do not know $p_t$ directly or $u_t$ at all**! So the above is intractable on its own since we don't know what appropriate $p_t$ and $u_t$ are
+The problem is that **we do not know $p_t$ directly or $u_t$ at all**! So the above is intractable on its own since we don't know what appropriate $p_t$ and $u_t$ are
 
 However, **we can construct $p_t$ and $u_t$ using per-sample methods**, which gives a much more tractable Flow Matching objective
 

@@ -11,9 +11,9 @@ How do we create a simple generative model under this assumption, with no access
 
 More concretely, we have $X$ observations/data and $Z$ hidden/latent variables (such as the parameters of such a model).
 
-$p(x)$: probability density function distribution of $X$
+$p(X)$: probability density function distribution of $X$
 
-$p(z)$ is prior probability, for example, 1/3 of all existent images are cats
+$p(Z)$ is prior probability, for example, 1/3 of all existent images are cats
 
 $p(x|z)$ is likelihood, for example how probable a certain image is given we know it is a cat. Sampling $x$ from this distribution will give us a generative model! If we wanted to generate cats, we could set z to be "cat" and sample from this distribution.
 
@@ -81,19 +81,15 @@ $$
 L = \log p(X) - \text{KL}[q(Z)||p(Z|X)]
 $$
 
-KL divergence is always > 1
+KL divergence is always greater than or equal to 1, thus $L \leq \log p(X)$, a lower bound of the log probability of the observations/data.
 
-thus $L \leq \log p(X)$, a lower bound of the log probability of the observations/data
-
-Also, the difference between them is exactly the KL divergence between the approx and true posterior distributions
+Also, the difference between these is exactly the KL divergence between the approx and true posterior distributions
 
 so the lower bound $L$ is exactly the log probability of the data if and only if the approximate posterior distribution is exactly the true posterior distribution
 
 So, maximizing our ELBO is the same as minimizing the KL-divergence between $q(Z)$ and $q(x,z)!$
 
-
-
-$p(x|z)$ is too hard to compute, so we start with a parametric dist (ex Gaussian) $Q_\phi(z|x)$ and adjust $\phi$ to make $Q$ close to $p$ by minimizing the KL-Divergence between the two(see Deriving KL-Divergence)
+$p(x|z)$ is too hard to compute, so we start with a parametric distribution (for example, Gaussian) $Q_\phi(z|x)$ and adjust $\phi$ to make $Q$ close to $p$ by minimizing the KL-Divergence between the two (see Deriving KL-Divergence)
 
 # Why do we need this in diffusion?
 

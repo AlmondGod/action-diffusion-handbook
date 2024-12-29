@@ -8,13 +8,13 @@ From [$\pi_0$: A Vision-Language-Action Flow Model for General Robot Control](ht
 
 “high precision and multimodal modeling” so ideal for “high-frequency dexterous tasks” up to 50Hz.
 
-# Data Space
+## Data Space
 
 $p(A_t|o_t)$ where $A_T = [a_t, a_{t + 1}, …, a_{t + H - 1}]$ is an action chunk of future actions with horizon H = 50  and $o_t$ is an observation
 
 $o_t$ is multiple RGB images, language command, and proprioception so $o_t = [I_t^1, …, T_t^n, l_t, q_t]$ where $I_t^i$ is the ith image, $l_t$ is the language token sequence, $q_t$ is the joint angle vector (proprioception)
 
-# Architecture
+## Architecture
 
 ![piarch](../../Images/Screenshot%202024-12-28%20at%2011.56.42 PM.png "from the paper")
 
@@ -28,20 +28,13 @@ Then these outputs and proprioception and noise passed through the denoising act
 
 for each $a_t$ in $A_T$, there is a corresponding action token fed through action expert
 
-### Transfusion
-
-Inspired by **Transfusion**: trains single transformer using multiple objectives
-
-building on [Transfusion](https://arxiv.org/pdf/2408.11039): separate set of weights for robotics specific (action and state) tokens led to improved performance
-
-analogous to Mixture of Experts with 2 mixture elements
-
-1. first is image and text inputs
-2. second is the *action expert:* robotics specific inputs/outputs such as proprioception and actions
+The architecture is also inspired by [Transfusion](https://arxiv.org/pdf/2408.11039), which trains single transformer using multiple objectives. Unlike Transfusion, $\pi_0$ also uses a separate set of weights for robotics specific (action and state) tokens led to improved performance. This is analogous to Mixture of Experts with 2 mixture elements:
+1. **VLM**: for image and text inputs
+2. **Action expert:**   robotics specific inputs/outputs such as proprioception and actions
 
 action expert uses bidirectional attention mask so all action tokens attend to each other
 
-# Training
+## Training
 
 tokens for discrete outputs (language) supervised by cross-entropy loss (standard for decoder-only transformers)
 
@@ -73,7 +66,7 @@ train network outputs $v_\theta(A_t^\tau, o_t)$ to match denoising vector field 
 
 in training, sample flow matching timestep $\tau$ from beta distribution that emphasizes lower (noisier) timesteps
 
-# Inference
+## Inference
 
 In inference, generate actions by integrating learned vector field from $\tau = 0…1$ starting with random noise $A_t^0 \sim N(0,I)$
 
@@ -87,7 +80,7 @@ where $\delta$= 0.1 is integration step size (10 integration steps)
 
 Can infer efficiently by caching attention keys and values from prefix $o_t$ and only recomputing suffix corresponding to action tokens for each integration step
 
-# Dataset
+## Dataset
 
 each training example is a timestep tuple of $(o_t, A_t)$
 

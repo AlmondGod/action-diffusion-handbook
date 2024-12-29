@@ -10,7 +10,7 @@ From [RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation](https://ar
 
 **Physically Interpretable Unified Action Space:** same action representation for different robots to preserve universal semantics of actions for cross-embodiment knowledge transfer
 
-# Problem Setting
+## Problem Setting
 
 language instruction $l$, observation $o_t$ at time $t$, produces action $a_t$, controls two arms to achieve goal specified in $l$
 
@@ -24,7 +24,7 @@ Not enough hardware-specific data, so pre-train on multi-robot data then fine-tu
 
 cross-embodiment data: $N$ tuples of sequences of $(l, o, a)$ where tuple $i$ is a sequence of length $T_i$ and data point $(i,t)$ is the $i$th tuple in the $t$th datapoint
 
-# Motivation for Diffusion
+## Why Diffusion
 
 If modeled deterministically as $(l, o_t) \rightarrow a_t$, we regress the $(l,o,a)$ tuples and will likely learn infeasible OOD actions like the average of different modes 
 
@@ -32,7 +32,7 @@ If modeled deterministically as $(l, o_t) \rightarrow a_t$, we regress the $(l,o
 
 We instead learn continuous conditional dist $p(a_t|l,o_t)$, where Diffusion models excel in diversity and quality
 
-# Architecture
+## Architecture
 
 need a model with **expressiveness** for multi-modal action distribution and **scalability**
 
