@@ -23,6 +23,6 @@ $$
 2. the noise of diffusion prevents mode collapse/acts as natural regularization
 3. just because conditional flow of OT is optimal doesn't mean marginal VF is an sanoptimal transport solution
     
-![Diffusion OT Flows](./Diffusion OT Flows.webp)
+![Diffusion OT Flows](./Diffusion%20OT%20Flows.webp)
 
 [[Prev]](./Diffusion%20Flow.md) [[Next]](../3.5:%20pi0/pi0.md)
