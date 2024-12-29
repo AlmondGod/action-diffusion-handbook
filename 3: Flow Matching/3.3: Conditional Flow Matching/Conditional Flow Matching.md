@@ -1,3 +1,5 @@
+![CFM](../../Images/Screenshot%202024-12-29%20at%203.11.54 PM.png)
+
 # Conditional Flow Matching
 
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)

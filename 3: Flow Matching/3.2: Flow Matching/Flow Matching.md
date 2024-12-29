@@ -1,8 +1,8 @@
+![FM](../../Images/Screenshot%202024-12-29%20at%203.17.21 PM.png)
+
 # Flow Matching
 
-
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
-
 
 In flow matching, we don’t have the vector field CNF model. We only have data points we know are desirable, and we want to create a vector field which will naturally flow any random point to those desirable points!
 

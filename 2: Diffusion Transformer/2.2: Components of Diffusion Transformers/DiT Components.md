@@ -1,4 +1,6 @@
-# Features ofDiffusion Transformer
+![S1 Robot](../../Images/Screenshot%202024-12-29%20at%202.36.45 PM.png)
+
+# Features of Diffusion Transformer
 
 From [The Ingredients of Robotic Diffusion Transformers](https://arxiv.org/pdf/2410.10088)
 

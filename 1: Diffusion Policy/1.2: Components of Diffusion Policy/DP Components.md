@@ -1,3 +1,5 @@
+![DP Components](../../Images/Screenshot%202024-12-29%20at%202.55.36 PM.png)
+
 # Features of Diffusion Policy
 
 From [Unpacking the Individual Components of Diffusion Policy](https://arxiv.org/pdf/2412.00084)

@@ -1,10 +1,12 @@
+![Gradient](../../Images/Screenshot%202024-12-29%20at%203.15.13 PM.png)
+
 # 2. Optimal Transport Conditional VFs
 
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
 
-**Optimal Transport:** most efficient way to turn one prob dist into another (claude analogy: moving pile sand A to make pile B)
+**Optimal Transport:** the most efficient way to turn one prob dist into another (claude analogy: moving pile sand A to make pile B).
 
-mean and stdev change linearly with time for straight line paths between start and end point
+In our case, this means that the mean and stdev of the probability path change linearly with time for straight line paths between start and end point.
 
 $$
 \mu_t(x) = tx_1, \text{ and } \sigma_t(x) = 1 - (1 - \sigma_{\text{min}})t

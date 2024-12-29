@@ -1,3 +1,5 @@
+![CNFs](../../Images/Screenshot%202024-12-29%20at%203.00.30 PM.png)
+
 # 3.1: Continuous Normalizing Flows
 
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)

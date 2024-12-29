@@ -1,3 +1,5 @@
+![CFM](../../Images/Screenshot%202024-12-29%20at%203.11.54 PM.png)
+
 # Conditional Probability Paths and Vector Fields
 
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
@@ -6,13 +8,13 @@ Conditional Flow Matching loss works with any conditional PP $p_t(x|x_1)$ and an
 
 However, the best choice for:
 
-1. $p_t(x|x_1)$: Gaussian at each timestep where mean $u_t(x_1)$ moves from 0 to $x_1$ and stdev $\sigma_t(x_1)$ shrinks from 1 to $\sigma_{\text{min}}$ (final stdev around $x_1$ for $p_1$), so: 
+- $p_t(x|x_1)$: a Gaussian at each timestep where mean $u_t(x_1)$ moves from 0 to $x_1$ and stdev $\sigma_t(x_1)$ shrinks from 1 to $\sigma_{\text{min}}$ (final stdev around $x_1$ for $p_1$), so: 
     
 $$
 p_t(x|x_1) = \mathcal{N}(x|\mu_t(x_1), \sigma_t(x_1)^2I)
 $$
     
-2. $u_t(x|x_1)$ is a simple vector field which pushes points toward the means along the path $p_t$ and accounts for shrinking variance: 
+- $u_t(x|x_1)$: a simple vector field which pushes points toward the means along the path $p_t$ and accounts for shrinking variance: 
     
 $$
 u_t(x|x_1) = \frac{\sigma_t'(x_1)}{\sigma_t(x_1)}(x - \mu_t(x_1)) + \mu_t'(x_1)

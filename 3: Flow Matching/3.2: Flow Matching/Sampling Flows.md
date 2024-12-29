@@ -1,3 +1,5 @@
+![FM](../../Images/Screenshot%202024-12-29%20at%203.17.21 PM.png)
+
 # Constructing $p_t$ and $u_t$ by sampling
 
 
@@ -36,11 +38,11 @@ $$
 
 where $u_t(.|x_1): R^d → R^d$ is a conditional vector field that generates $p_t(.|x_1)$
 
-Aggregating conditional VFs creates correct VF for modeling marginal prob path.
+Aggregating conditional VFs creates correct VF for modeling marginal probability path.
 
-Essentially this is the **overall combined VF from all the conditional VFs to each individual datapoint**
+>Essentially this is the **overall combined VF from all the conditional VFs to each individual datapoint**
 
-Can breakdown unknown intractable marginal VF into simpler conditional VFs which only depend on one data sample $x_1$
+We can breakdown unknown intractable marginal VF into simpler conditional VFs which only depend on one data sample $x_1$
 
 But due to intractable integrals in marginal PP and VF definitions, it is still intractable to compute $u_i$ and unbiased estimator of original Flow Matching objective
 

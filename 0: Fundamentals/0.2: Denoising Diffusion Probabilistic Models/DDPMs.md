@@ -1,3 +1,5 @@
+![DDPM](../../Images/Diffusion%20Flows.png)
+
 # Denoising Diffusion Probabilistic Models
 
 From [Denoising Diffusion Probabilistic Models](https://arxiv.org/pdf/2006.11239)

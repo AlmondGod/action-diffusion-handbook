@@ -1,3 +1,4 @@
+![AD](../../Images/Screenshot%202024-12-29%20at%203.10.32 PM.png)
 # Action Diffusion
 
 From [Visuomotor Policy Learning via Action Diffusion](https://arxiv.org/pdf/2303.04137)
@@ -134,7 +135,7 @@ Experimentally, DDIm with 100 training iters and 10 inference iters leads to 0.1
     1. **action basins:** valleys in diffusion gradient map which are groups of similar actions
     2. Due to stochastic initialization and noise added in the navigation (denoising) stage, we can end off in different action basins which achieve the same goal, for example:
     
-    ![Diffusion Trajectories](./Diffusion%20Trajectories.webp)
+    ![Diffusion Trajectories](../../Images/Diffusion%20Trajectories.webp)
     
 
 ### Synergy with Position Control

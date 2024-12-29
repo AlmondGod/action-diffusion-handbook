@@ -1,3 +1,5 @@
+![pi0](../../Images/Screenshot%202024-12-29%20at%203.30.10 PM.png)
+
 # Physical Intelligence's VLA Flow Foundation Model
 
 From [$\pi_0$: A Vision-Language-Action Flow Model for General Robot Control](https://www.physicalintelligence.company/download/pi0.pdf)
@@ -13,6 +15,8 @@ $p(A_t|o_t)$ where $A_T = [a_t, a_{t + 1}, …, a_{t + H - 1}]$ is an action chu
 $o_t$ is multiple RGB images, language command, and proprioception so $o_t = [I_t^1, …, T_t^n, l_t, q_t]$ where $I_t^i$ is the ith image, $l_t$ is the language token sequence, $q_t$ is the joint angle vector (proprioception)
 
 # Architecture
+
+![piarch](../../Images/Screenshot%202024-12-28%20at%2011.56.42 PM.png "from the paper")
 
 Uses OpenSource 3B param VLM PaliGemma and add 300M param action expert init from scratch
 
@@ -102,5 +106,7 @@ lower frequency. (~5-10 Hz), diverse, 100s of Millions of timesteps
 fine-tuning on task-specific data
 
 anywhere from 5-100 hours of data per task depending on complexity
+
+[Here's a video](https://www.physicalintelligence.company/blog/pi0) of their State-of-the-Art results on a variety of tasks, including end-to-end laundry folding: 
 
 [[Prev]](../3.4:%20Diffusion%20and%20Optimal%20Transport%20as%20Flows/Optimal%20Transport%20Flow.md)

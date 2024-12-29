@@ -1,3 +1,4 @@
+![DiT](../../Images/Screenshot%202024-12-29%20at%202.32.11 PM.png)
 # Diffusion Transformer (DiT)
 
 From [Scalable Diffusion Models with Transformers](https://arxiv.org/pdf/2212.09748)

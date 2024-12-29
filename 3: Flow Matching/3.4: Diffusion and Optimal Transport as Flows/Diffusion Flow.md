@@ -1,3 +1,5 @@
+![Gradient](../../Images/Screenshot%202024-12-29%20at%203.15.13 PM.png)
+
 # 1. Diffusion Conditional VFs
 
 From [Flow Matching for Generative Modeling](https://arxiv.org/pdf/2210.02747)
@@ -24,6 +26,6 @@ $$
 
 We are combining the Diffusion Condition Vector Field with Flow Matching objective, which they claim is better than score matching objective. They argue Diffusion technically never approaches true datapoints $x_1$ but just approximates/approaches them and can’t reach them in finite time, whereas in Flow Matching we exactly define the ends of our flow paths to be our $x_1$s
 
-Much better theoretical guarantees essentially!
+Essentially, it gives us much better theoretical guarantees!
 
 [[Prev]](../3.3:%20Conditional%20Flow%20Matching/Conditional%20Probability%20Paths%20and%20Vector%20Fields.md) [[Next]](./Optimal%20Transport%20Flow.md)

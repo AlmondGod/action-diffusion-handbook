@@ -1,3 +1,5 @@
+![RDT-1B](../../Images/Screenshot%202024-12-29%20at%203.03.54 PM.png)
+
 # Action Diffusion Transformer Foundation Model
 
 From [RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation](https://arxiv.org/pdf/2410.07864)
@@ -53,9 +55,10 @@ need a model with **expressiveness** for multi-modal action distribution and **s
 
 We want each dimension in the unified space to have clear meaning (ex: right shoulder, elbow, etc), padding any missing elements
 
-How does the unified action space actually work?
+We can simply manually correspond each dimension of the current robot's joint space to the semantic equivalent in the unified action space. 
 
-# TODO: Finish here
+RDT-1B implements this as a 128-dimensional vector with the below correspondence:
 
+![RDT-1B Unified Action Space](../../Images/Screenshot%202024-12-28%20at%2011.49.11 PM.png)
 
 [[Prev]](../2.2:%20Components%20of%20Diffusion%20Transformers/DiT%20Components.md) [[Next]](../../3:%20Flow%20Matching/3.1:%20Continuous%20Normalizing%20Flows/CNFs.md)

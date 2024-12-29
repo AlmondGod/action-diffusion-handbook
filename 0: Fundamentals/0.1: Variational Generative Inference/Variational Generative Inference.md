@@ -1,9 +1,9 @@
-# Variational Generative Inference  
+![VGI](../../Images/Flowing%20Wave.png)
+
+# Variational Generative Inference 
 
 Heavily inspired by https://xyang35.github.io/2017/04/14/variational-lower-bound/ by Xitong Yang
 and https://blog.evjang.com/2016/08/variational-bayes.html by Eric Jang
-
-Motivation: priors for Diffusion
 
 Diffusion operates under the assumption that the data is generated from a prior distribution, and we want to sample from this distribution.
 
@@ -11,11 +11,9 @@ How do we create a simple generative model under this assumption, with no access
 
 More concretely, we have $X$ observations/data and $Z$ hidden/latent variables (such as the parameters of such a model).
 
-$P(X)$: prob dist over $X$
+$p(x)$: probability density function distribution of $X$
 
-$p(x)$: density function dist of $X$
-
-$P(z)$ is prior probability, for example, 1/3 of all existent images are cats
+$p(z)$ is prior probability, for example, 1/3 of all existent images are cats
 
 $p(x|z)$ is likelihood, for example how probable a certain image is given we know it is a cat. Sampling $x$ from this distribution will give us a generative model! If we wanted to generate cats, we could set z to be "cat" and sample from this distribution.
 
