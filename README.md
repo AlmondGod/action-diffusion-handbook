@@ -1,4 +1,4 @@
-![Sora Diffusion Particle Generation](./images/Screenshot%202024-12-29%20at%202.30.30 PM.png "Sora Diffusion Particle Generation")
+![Sora Diffusion Particle Generation](./Images/Screenshot%202024-12-29%20at%202.30.30 PM.png "Sora Diffusion Particle Generation")
 
 # Action Diffusion Handbook
 
@@ -40,9 +40,7 @@ Each section contains a markdown file(s), original papers, and some example code
 
 [3.5: pi0](./3:%20Flow%20Matching/3.5:%20pi0/pi0.md)
 
-### TODO: add header images 
 ### TODO: Revise
-
 ### TODO: add main section
 
 ## Diffusion Visualization with Genesis
