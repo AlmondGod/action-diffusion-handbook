@@ -153,6 +153,8 @@ For model architecture, we need **expressiveness** for multi-modal action distri
         1. As opposed to typical class label condition compressed into single token then  Adaptive Layer Norm (class label embedding are inputs for function to generate scale and shift params for layer) applied
         2. inject images and text at alternating layers since image tokens usually way more and overshadow text tokens f simultaneously injected
 
+![FM](./Images/Screenshot%202024-12-29%20at%209.58.03 PM.png)
+
 ## Flow Matching
 
 A **Continuous Normalizing Flow (CNF)** is a generative model for arbitrary probability paths (superset of paths modeled by Diffusion processes)
@@ -242,6 +244,8 @@ $$
 We are combining the Diffusion Condition Vector Field with Flow Matching objective, which they claim is better than score matching objective. They argue Diffusion technically never approaches true datapoints $x_1$ but just approximates/approaches them and can’t reach them in finite time, whereas in Flow Matching we exactly define the ends of our flow paths to be our $x_1$s
 
 Essentially, it gives us much better theoretical guarantees!
+
+![pi0](./Images/Screenshot%202024-12-29%20at%209.56.49 PM.png)
 
 ## Physical Intelligence's VLM+Flow Foundation Model
 
