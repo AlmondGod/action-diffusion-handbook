@@ -2,9 +2,9 @@
 
 # Action Diffusion Handbook
 
-This handbook teaches from the fundamentals of diffusion through diffusion policy and transformers to flow matching in $\pi_0$. 
+This handbook teaches from the fundamentals of diffusion through diffusion policy and transformers to flow matching in $\pi_0$. Below is a summary of the repository contents.
 
-Each section contains a markdown file(s), original papers, and some example code. The markdown files explain the contents of papers more clearly and concisely. Feel free to skip around, and also add your own notes/papers/code you think are worth including through a PR! Start at section 1 if you are already familiar with regular diffusion.
+Each repository section contains a markdown file(s), original papers, and some example code. The markdown files explain the contents of papers more clearly and concisely. Feel free to skip around, and also add your own notes/papers/code you think are worth including through a PR! Start at section 1 if you are already familiar with regular diffusion.
 
 ### Contents: 
 
