@@ -83,7 +83,7 @@ $$
 
 ## Action Diffusion
 
-1. Output $x$ represents robot actions instead of the typical image
+1. Now, output $x$ represents robot actions instead of the typical image
 2. Denoising process is conditioned on input observation $O_t$
     1. Action Diffusion approximates conditional dist $p(A | O)$ instead of joint dist of both $(p(A,O))$
         1. Thus, there is no need to infer future states/observations, which speeds up the process
@@ -103,12 +103,6 @@ $$
 
 ## Diffusion Transformer
 
-
-- first learn autoencoder encoding of x into latent space of zs, then learn Diffusion Model in space zs, then generate with diffusion model and learned decoder
-- Theory is better Diffusion Model since vastly lower latent dim than data dim
-
-### Architecture
-
 Like Vision Transformer (ViT), operates on sequence of patches
 
 1. Patchify: converts spatial input into sequence of T tokens of dim d with linear embedding
@@ -122,13 +116,13 @@ Like Vision Transformer (ViT), operates on sequence of patches
 5. Transformer Decoder (image tokens to noise prediction diagonal covariance prediction)
     1. standard linear decoder (apply final layer norm, linearly decode each token into 2 x same dim as spatial input)
     2. We predict covariance because different patches have different uncertainty/information levels
+5. **Latent Diffusion Model:** First, we learn autoencoder encoding of x into latent space of zs, then learn Diffusion Model in space zs, then generate with diffusion model and learned decoder
+    1. Intuitively, this is a better Diffusion Model since it operates in a vastly lower latent dim than data dim
+    2. Use standard VAE model from stable diffusion as encoder/decoder and train DiT in latent space
 
-Use standard VAE model from stable diffusion as encoder/decoder and train DiT in latent space
+## RDT-1B: Robotics Diffusion Transformer
 
-## RDT-1B
-**Robotics Diffusion Transformer:** 1.2B param lagnuage-condtioned bimanual manipulation with vision foundation model
-
-- fine-tuned on self-created dataset, 0-shot generalizable to new objects/scenes and 1-5 demo learning of new skills
+1.2B param lagnuage-condtioned bimanual manipulation with a vision foundation model, fine-tuned on self-created dataset, 0-shot generalizable to new objects/scenes, and 1-5 demo learning of new skills!
 
 **Physically Interpretable Unified Action Space:** same action representation for different robots to preserve universal semantics of actions for cross-embodiment knowledge transfer
 
@@ -161,28 +155,22 @@ For model architecture, we need **expressiveness** for multi-modal action distri
 
 ## Flow Matching
 
-**Continuous Normalizing Flows (CNFs):** generative model for arbitrary probability paths (superset of paths modeled by Diffusion processes)
+A **Continuous Normalizing Flow (CNF)** is a generative model for arbitrary probability paths (superset of paths modeled by Diffusion processes)
 
-**Flow Matching:** simulation-free method to train CNFs by regressing vector fields of fixed conditional probability paths
+The goal of **Flow Matching** is to train CNFs by learning vector fields which represent of fixed conditional probability paths
 
 - When applied to Diffusion paths, flow matching is a robust/stable training method
 - Flow Matching can also use non-Diffusion probability paths like Optimal Transport
 
 Start with pure noise $p_0$, neural net vector field defines flow that smoothly moves each point along path, points carry probability masses with them and determinant ensures probability preserves (all points in the distribution integrate to 1), and ends in complex distribution $p_1$.
 
-**Goal:** 
-
-In flow matching, we don’t have the vector field CNF model. We only have data points we know are desirable, and we want to create a vector field which will naturally flow any random point to those desirable points!
+**Goal:** In flow matching, we don’t have the vector field CNF model. We only have data points we know are desirable, and we want to create a vector field which will naturally flow any random point to those desirable points!
 
 Essentially, we just need to learn the vector field! if we learn this, then we can sample any arbitrary point and follow the flow defined by the vector field to some desired probability distribution we want.
 
-Formally,
+We have data about desirable ending probability distribution $q(x_1)$, and we want to create a **quality vector field (generative model)** which flows from some simple distribution $p_0$ to areas close around these samples from $q_1$.
 
-$q_1$ is a RV distributed according to unknown dist $q(x_1)$, and we only have access to samples
-
-**Goal**: match target probability path $p_t$ flowing from simple dist $p_0$ (ex some random normal dist) to dist $p_1$ which Is approximately equal in dist to $q$ (essentially we have data about desirable ending probability dists, and we want to create a **quality vector field (generative model)** which flows to areas close around these samples from $q_1$)
-
-Given target $p_1(x)$ and vector field $u_1(x)$ to generate $p_t(x)$, Flow Matching loss is 
+Given the target distribution $p_1(x)$ and vector field $u_1(x)$ to generate $p_t(x)$, our Flow Matching loss is 
 
 $$
 \mathcal{L}{\text{FM}}(\theta) = \mathbb{E}_{t,p_t(x)}\|v_t(x) - u_t(x)\|^2
@@ -194,7 +182,7 @@ At zero loss the learned CNF model generates $p_t(x)$ (our desired final data di
 
 The problem is that **we do not know $p_t$ directly or $u_t$ at all**! So the above is intractable on its own since we don't know what appropriate $p_t$ and $u_t$ are
 
-However, we can use Conditional Flow Matching.
+However, we can use Conditional Flow Matching to approximate the vector field using sampling.
 
 ### Conditional Flow Matching
 
@@ -213,12 +201,12 @@ or the expected difference between vector field and sampling-estimated true fiel
 Essentially, we sample $x_1$ from data dist and $x$ (end dist) from $p(x|x_1)$ to get $(x,u-t(x))$ pairs to train final vector field $v_t$
 
 
-So, at last, we have our final Flow Matching Method:
+So, at last, we have our **final Flow Matching Method**:
 
-1. Have a bunch of data samples $x_1$ which are our desirable instances samples by true desirable distribution $p_1$ 
-2. sample from some standard normal $p_0$ (a bunch of random points weighted according to normal distribution)
+1. Have a collection of data samples $x_1$ which are our desired instances sampled by some true desirable distribution $p_1$ 
+2. Sample from some standard normal $p_0$ (a bunch of random points weighted according to normal distribution)
 3. Sample $x$ from $p_0$ and $x_1$, and now $p_t(x|x_1)$ is some path which is an interpolation between $x$ and $x_1$ (which WE DEFINE however we want as long as it is continuous, thus it is easy to sample from!)
-4. sample a point along that path, and compare our current neural net vector field $v_t(x)$ with $u_t(x|x_1)$ at that point (we design $u_t(x|x_1)$, can be simple $(x_1 - x)$ which always pushes points towards $x_1$, so we always know exactly what it is)
+4. Sample a point along that path, and compare our current neural net vector field $v_t(x)$ with $u_t(x|x_1)$ at that point (we design $u_t(x|x_1)$, can be simple $(x_1 - x)$ which always pushes points towards $x_1$, so we always know exactly what it is)
 
 Conditional Flow Matching loss works with any conditional PP $p_t(x|x_1)$ and any conditional VF $u_t(x|x_1)$
 
@@ -255,81 +243,35 @@ We are combining the Diffusion Condition Vector Field with Flow Matching objecti
 
 Essentially, it gives us much better theoretical guarantees!
 
-## Physical Intelligence's VLA Flow Foundation Model
+## Physical Intelligence's VLM+Flow Foundation Model
 
 A generalist robot foundation model consisting of an “action expert” which uses conditional flow matching to augment a pretrained Vision-Language Model (VLM).
 
-“high precision and multimodal modeling” so ideal for “high-frequency dexterous tasks” up to 50Hz.
+We want to learn $p(A_t|o_t)$ where $A_T = [a_t, a_{t + 1}, …, a_{t + H - 1}]$ is an action chunk of future actions with horizon H = 50  and $o_t$ is an observation which consists of multiple RGB images $I_t^1, …, I_t^n$, a language command $l_t$, and proprioception $q_t$.
 
-### Data Space
+As the VLM we use OpenSource 3B param VLM PaliGemma, and we train a300M param action expert init from scratch.
 
-$p(A_t|o_t)$ where $A_T = [a_t, a_{t + 1}, …, a_{t + H - 1}]$ is an action chunk of future actions with horizon H = 50  and $o_t$ is an observation
-
-$o_t$ is multiple RGB images, language command, and proprioception so $o_t = [I_t^1, …, T_t^n, l_t, q_t]$ where $I_t^i$ is the ith image, $l_t$ is the language token sequence, $q_t$ is the joint angle vector (proprioception)
-
-### Architecture
-
-Uses OpenSource 3B param VLM PaliGemma and add 300M param action expert init from scratch
-
-Images passed through Vision Transformers (ViT) then with language passed to pretrained 3B VLM. 
-
-images and states encoded with corresponding encoders and projected through linear projection layer into same space as language tokens
-
-Then these outputs and proprioception and noise passed through the denoising action expert to output a sequence of future actions $A_T = [a_t, a_{t + 1}, …, a_{t + H}]$
-
-for each $a_t$ in $A_T$, there is a corresponding action token fed through action expert
+First, images are passed through Vision Transformers then with language tokens through a pretrained 3B VLM. This output with proprioception and noise are passed through the denoising action expert to output a sequence of future actions $A_T = [a_t, a_{t + 1}, …, a_{t + H}]$
 
 The architecture is also inspired by [Transfusion](https://arxiv.org/pdf/2408.11039), which trains single transformer using multiple objectives. Unlike Transfusion, $\pi_0$ also uses a separate set of weights for robotics specific (action and state) tokens led to improved performance. This is analogous to Mixture of Experts with 2 mixture elements:
 1. **VLM**: for image and text inputs
 2. **Action expert:**   robotics specific inputs/outputs such as proprioception and actions
 
-action expert uses bidirectional attention mask so all action tokens attend to each other
+The action expert uses bidirectional attention mask so all action tokens attend to each other
 
-### Training
-
-tokens for discrete outputs (language) supervised by cross-entropy loss (standard for decoder-only transformers)
-
-tokens for continuous outputs (vision/actions/states) supervised by flow-matching loss applied on individual sequence elements 
-
-in training, supervise action tokens using conditional flow matching loss
+In training, language tokens are supervised by standard cross-entropy loss, but vision/actions/states are supervised by Conditional Flow Matching loss with a linear Gaussian probability path:  
 
 $$
 L^\tau(\theta) = \mathbb{E}_{p(\mathbf{A}_t|\mathbf{o}_t),q(\mathbf{A}_t^\tau|\mathbf{A}t)}|\mathbf{v}\theta(\mathbf{A}_t^\tau, \mathbf{o}_t) - \mathbf{u}(\mathbf{A}_t^\tau|\mathbf{A}_t)|^2
 $$
 
-where subscripts are robot timesteps and superscripts and flow matching timesteps between 0 and 1
+Essentially, we want to minimize the expected difference between predicted VF and actual VF over actions conditioned on the current obs.
 
-essentially minimize expected difference between predicted vf and actual vf  over actions conditioned on the current obs
+1. First, we sample random noise $\epsilon \sim N(o,I)$, 
+2. Then, we compute noisy actions $A_t^{\tau} = \tau A_t + (t - \tau)\epsilon$, 
+3. Finally, we train network outputs $v_\theta(A_t^\tau, o_t)$ to match denoising vector field $u(A_t^\tau | A_t) = \epsilon - A_t$
 
-CFM using linear Gaussian (can also be Optimal Transport) probability path
-
-$$
-q(\mathbf{A}_t^\tau|\mathbf{A}_t) = \mathcal{N}(\tau\mathbf{A}_t, (1-\tau)\mathbf{I})
-$$
-
-### Action Expert Training Process:
-
-sample random noise $\epsilon \sim N(o,I)$, 
-
-compute noisy actions $A_t^{\tau} = \tau A_t + (t - \tau)\epsilon$, 
-
-train network outputs $v_\theta(A_t^\tau, o_t)$ to match denoising vector field $u(A_t^\tau | A_t) = \epsilon - A_t$
-
-in training, sample flow matching timestep $\tau$ from beta distribution that emphasizes lower (noisier) timesteps
-
-### Inference
-
-In inference, generate actions by integrating learned vector field from $\tau = 0…1$ starting with random noise $A_t^0 \sim N(0,I)$
-
-and using forward Euler integration rule
-
-$$
-\mathbf{A}_t^{\tau+\delta} = \mathbf{A}t^\tau + \delta\mathbf{v}\theta(\mathbf{A}_t^\tau, \mathbf{o}_t)
-$$
-
-where $\delta$= 0.1 is integration step size (10 integration steps)
-
-Can infer efficiently by caching attention keys and values from prefix $o_t$ and only recomputing suffix corresponding to action tokens for each integration step
+At inference time, we generate actions by integrating learned vector field from $\tau = 0…1$ starting with random noise $A_t^0 \sim N(0,I)$.
 
 ## Future
 
