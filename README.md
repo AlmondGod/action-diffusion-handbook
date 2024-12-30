@@ -2,9 +2,7 @@
 
 # Action Diffusion Handbook
 
-### TODO: Revise
-
-This handbook teaches from the fundamentals of diffusion through diffusion policy and transformers to flow matching in pi0. 
+This handbook teaches from the fundamentals of diffusion through diffusion policy and transformers to flow matching in $\pi_0$. 
 
 Each section contains a markdown file(s), original papers, and some example code. The markdown files explain the contents of papers more clearly and concisely. Feel free to skip around, and also add your own notes/papers/code you think are worth including through a PR! Start at section 1 if you are already familiar with regular diffusion.
 
@@ -50,9 +48,9 @@ This Colab Notebook has the elements set up for training a Diffusion Transformer
 
 It uses [this forked DiT repository](https://github.com/AlmondGod/dit_policy).
 
-![R2](./Images/Screenshot%202024-12-29%20at%206.29.43 PM.png)
+# A Preview of the Journey from Diffusion to $\pi_0$ Flow Matching
 
-# Compressed Journey from Diffusion to $\pi_0$ Flow Matching
+![R2](./Images/Screenshot%202024-12-29%20at%206.29.43 PM.png)
 
 ## Denoising Diffusion
 
@@ -153,9 +151,9 @@ For model architecture, we need **expressiveness** for multi-modal action distri
         1. As opposed to typical class label condition compressed into single token then  Adaptive Layer Norm (class label embedding are inputs for function to generate scale and shift params for layer) applied
         2. inject images and text at alternating layers since image tokens usually way more and overshadow text tokens f simultaneously injected
 
-![FM](./Images/Screenshot%202024-12-29%20at%209.58.03 PM.png)
-
 ## Flow Matching
+
+![FM](./Images/Screenshot%202024-12-29%20at%209.58.03 PM.png)
 
 A **Continuous Normalizing Flow (CNF)** is a generative model for arbitrary probability paths (superset of paths modeled by Diffusion processes)
 
@@ -245,9 +243,9 @@ We are combining the Diffusion Condition Vector Field with Flow Matching objecti
 
 Essentially, it gives us much better theoretical guarantees!
 
-![pi0](./Images/Screenshot%202024-12-29%20at%209.56.49 PM.png)
-
 ## Physical Intelligence's VLM+Flow Foundation Model
+
+![pi0](./Images/Screenshot%202024-12-29%20at%209.56.49 PM.png)
 
 A generalist robot foundation model consisting of an “action expert” which uses conditional flow matching to augment a pretrained Vision-Language Model (VLM).
 
