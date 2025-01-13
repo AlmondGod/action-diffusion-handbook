@@ -173,7 +173,7 @@ We have data about desirable ending probability distribution $q(x_1)$, and we wa
 Given the target distribution $p_1(x)$ and vector field $u_1(x)$ to generate $p_t(x)$, our Flow Matching loss is 
 
 $$
-\mathcal{L}{\text{FM}}(\theta) = \mathbb{E}_{t,p_t(x)}\|v_t(x) - u_t(x)\|^2
+L_{\text{FM}}(\theta) = \mathbb{E}_{t,p_t(x)}\|v_t(x) - u_t(x)\|^2
 $$
 
 or the expected difference between our neural network predicting the vector field and the actual vector field $u_t$
@@ -189,7 +189,7 @@ However, we can use Conditional Flow Matching to approximate the vector field us
 Conditional Flow Matching objective: 
 
 $$
-\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t,q(x_1),p_t(x|x_1)} \|v_t(x) - u_t(x|x_1)\|^2
+L_{CFM}(\theta) = \mathbb{E}_{t,q(x_1),p_t(x|x_1)} \|v_t(x) - u_t(x|x_1)\|^2
 $$
 
 $$
